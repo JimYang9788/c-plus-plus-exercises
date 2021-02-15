@@ -5,9 +5,17 @@ using namespace std;
 class Person {
     int id;
     char name [NAME_SIZE];
+    // Person(int a): id(a){
+    //     // The data member id is assigned before the ctual object is created 
+    //     // and before the actual object is created and before the remainder 
+    //     // of the constructor code is called. 
+    // }
+
+
     public:
-    void aboutMe(){
-        cout << "I am a person" << endl;
+    virtual void aboutMe() = 0;
+    virtual ~Person(){
+        cout << "deleting virtual person" <<endl;
     }
 };
 
@@ -16,11 +24,17 @@ class Student : public Person {
     void aboutMe(){
         cout << "I am a student" <<endl;
     }
+    ~Student(){
+        cout <<"Virtual destructor being called" <<endl;
+    }
 };
 
 int main(){
-    Student * p = new Student ();
+    Person * p = new Student ();
+    Student * p2 = new Student ();
+
     p->aboutMe();
+    p2->aboutMe();
     delete p;
     return 0;
 }
